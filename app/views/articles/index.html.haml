@@ -1,0 +1,39 @@
+%h1 Listing articles
+
+.listing{:style=>"float:left; width: 1300px;"}
+  - @articles.each do |article|
+    .article
+      %p
+        ="#{article.published_date} in #{article.location.name}"
+        %br
+        ="#{article.publisher.name} - \"#{article.title}\" [#{article.category.title}]"
+        %br
+        %blockquote=article.content
+        / = link_to 'Show', article
+        / = link_to 'Edit', edit_article_path(article)
+        / = link_to 'Destroy', article, :confirm => 'Are you sure?', :method => :delete
+    %hr
+/= link_to 'New Article', new_article_path
+.search{:style=>"float:left; width: 300px; margin-left: 40px"}
+  = form_tag articles_path, method: :get do
+    
+    %h3="Suche"
+    %p="Suchbegriff"
+    = text_field_tag :query, params[:query]
+
+    %h4="Filter"
+    %p="Category"
+    =select_tag "category", options_from_collection_for_select(Category.all, "id", "title"), :include_blank => true
+
+    / %p="Publisher"
+    / =text_field_tag :publisher, params[:publisher]
+
+    %p="Geo Search"
+    =select_tag "location", options_from_collection_for_select(Location.all, "id", "name"), :include_blank => true
+    
+    %br
+    %br
+    = submit_tag "Search", name: nil 
+
+.clear{:style=>"clear:both"}
+
