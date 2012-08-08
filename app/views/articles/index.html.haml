@@ -23,13 +23,14 @@
 
     %h4="Filter"
     %p="Category"
-    =select_tag "category", options_from_collection_for_select(Category.all, "id", "title"), :include_blank => true
+    =select_tag "category", options_from_collection_for_select(Category.all, "id", "title", params[:category]), :include_blank => true
 
     %p="Publisher"
     =text_field_tag :publisher, params[:publisher]
 
     %p="Geo Search   "
-    =select_tag "location", options_from_collection_for_select(Location.all, "id", "name"), :include_blank => true
+    =select_tag "location", options_from_collection_for_select(Location.all, "id", "name", params[:location]), :include_blank => true
+    =select_tag("radius", options_for_select(['10km', '20km', '50km', '100km', '200km','1000km'], params[:radius] || '100km'))
     
     %br
     %br

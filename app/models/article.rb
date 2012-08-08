@@ -78,7 +78,8 @@ class Article < ActiveRecord::Base
       #query :term, {publisher: {name: params[:publisher]}} if params[:publisher].present?
 
       #filter :geo_distance, lat_lon: "51,7", distance: '100km' if lat_lng_arr!=[]
-      filter :geo_distance, lat_lon: lat_lng_arr.join(","), distance: '100km' if lat_lng_arr!=[]
+      distance = params[:radius] || '100km'
+      filter :geo_distance, lat_lon: lat_lng_arr.join(","), distance: distance if lat_lng_arr!=[]
     end
 
     
