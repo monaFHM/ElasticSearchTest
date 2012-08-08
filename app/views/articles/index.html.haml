@@ -25,10 +25,10 @@
     %p="Category"
     =select_tag "category", options_from_collection_for_select(Category.all, "id", "title"), :include_blank => true
 
-    / %p="Publisher"
-    / =text_field_tag :publisher, params[:publisher]
+    %p="Publisher"
+    =text_field_tag :publisher, params[:publisher]
 
-    %p="Geo Search"
+    %p="Geo Search   "
     =select_tag "location", options_from_collection_for_select(Location.all, "id", "name"), :include_blank => true
     
     %br
